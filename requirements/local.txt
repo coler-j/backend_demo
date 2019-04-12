@@ -1,0 +1,11 @@
+-r ./base.txt
+
+# Code quality
+# ------------------------------------------------------------------------------
+pycodestyle==2.5.0
+coverage==4.5.3  # https://github.com/nedbat/coveragepy
+
+# Django
+# ------------------------------------------------------------------------------
+factory-boy==2.11.1  # https://github.com/FactoryBoy/factory_boy
+Faker==1.0.4
