@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from demo.apps.tasks.filters import TaskFilter
 from demo.apps.tasks.models import Task
 from demo.apps.tasks.serializers import TaskSerializer
 
@@ -9,3 +10,4 @@ class TaskViewSet(ModelViewSet):
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    filterset_class = TaskFilter
