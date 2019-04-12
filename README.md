@@ -11,4 +11,5 @@ cmd: activate
 ```
 
 - From the root of the project install dependencies into your venv with `pip install -r requirements.txt`
+- The demo project uses SQLite as a DB backend, create database tables with the command: `python manage.py migrate`
 - You can now launch the Django server with `python manage.py runserver`
