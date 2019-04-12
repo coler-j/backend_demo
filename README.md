@@ -16,3 +16,4 @@ cmd: activate
 - You can now launch the Django server with `python manage.py runserver`
 - Access the standard Django admin interface at: [http://127.0.0.1:8000/admin](http://127.0.0.1/admin)
 - Access the Swagger API Reference interface at: [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/)
+- You may need to login to the API through the "Authorize" button with the superuser that you have created.
