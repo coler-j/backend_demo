@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django_fsm import FSMField
 from model_utils.models import TimeStampedModel
 
 
@@ -14,6 +15,18 @@ class Task(TimeStampedModel):
     :param due_date: The task due date (optional)
 
     """
+
+    class STATE:
+        NEW = 'NEW'
+        CANCELED = 'XXX'
+        IN_PROGRESS = 'INP'
+        COMPLETED = 'CMP'
+
+    STATE_CHOICES = ((STATE.NEW, 'New', 'New'),
+                     (STATE.CANCELED, 'Canceled', 'Canceled'),
+                     (STATE.IN_PROGRESS, 'In progress', 'In progress'),
+                     (STATE.COMPLETED, 'Completed', 'Completed'))
+    state = FSMField(default=STATE.NEW, state_choices=STATE_CHOICES)
     created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='tasks',
                                    editable=False)
     assigned_to = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL,
