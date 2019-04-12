@@ -7,6 +7,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Demo
+db.*
+.idea
+
 # Distribution / packaging
 .Python
 build/
@@ -338,7 +342,12 @@ django_demo/media/
 .pytest_cache/
 
 
-.env
-.envs/*
-!.envs/.local/
+.env
+
+.envs/*
+
+!.envs/.local/
+
 .idea/backend_demo.iml
+
+db.sqlite3

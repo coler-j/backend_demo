@@ -3,7 +3,8 @@ from django.apps import AppConfig
 
 class UsersAppConfig(AppConfig):
 
-    name = "django_demo.users"
+    name = "demo.apps.users"
+    label = "users"
     verbose_name = "Users"
 
     def ready(self):
