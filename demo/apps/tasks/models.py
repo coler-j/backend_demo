@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django_fsm import FSMField
+from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
 
@@ -22,11 +22,11 @@ class Task(TimeStampedModel):
         IN_PROGRESS = 'INP'
         COMPLETED = 'CMP'
 
-    STATE_CHOICES = ((STATE.NEW, 'New', 'New'),
-                     (STATE.CANCELED, 'Canceled', 'Canceled'),
-                     (STATE.IN_PROGRESS, 'In progress', 'In progress'),
-                     (STATE.COMPLETED, 'Completed', 'Completed'))
-    state = FSMField(default=STATE.NEW, state_choices=STATE_CHOICES)
+    STATE_CHOICES = ((STATE.NEW, 'New'),
+                     (STATE.CANCELED, 'Canceled'),
+                     (STATE.IN_PROGRESS, 'In progress'),
+                     (STATE.COMPLETED, 'Completed'))
+    state = FSMField(default=STATE.NEW, choices=STATE_CHOICES)
     created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='tasks',
                                    editable=False)
     assigned_to = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL,
@@ -38,3 +38,24 @@ class Task(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    @transition(field=state, source=STATE.NEW, target=STATE.IN_PROGRESS)
+    def start(self):
+        """
+        The `start` FSM transition (has no side effects).
+        """
+        pass
+
+    @transition(field=state, source=[STATE.NEW, STATE.IN_PROGRESS], target=STATE.CANCELED)
+    def cancel(self):
+        """
+        The `cancel` FSM transition (has no side effects).
+        """
+        pass
+
+    @transition(field=state, source=[STATE.NEW, STATE.IN_PROGRESS], target=STATE.COMPLETED)
+    def complete(self):
+        """
+        The `complete` FSM transition (has no side effects).
+        """
+        pass

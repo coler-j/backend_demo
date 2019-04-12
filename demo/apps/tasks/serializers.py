@@ -10,7 +10,8 @@ class TaskSerializer(ModelSerializer):
     created_by = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
+    state_display = serializers.CharField(source='get_state_display', read_only=True)
 
     class Meta:
         model = Task
-        fields = ['created_by', 'assigned_to', 'title', 'details', 'due_date']
+        fields = ['created_by', 'assigned_to', 'title', 'details', 'due_date', 'state', 'state_display']
